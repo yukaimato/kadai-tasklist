@@ -59,4 +59,21 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:content, :status)
   end
+  
+  def correct_user
+    @task = current_user.tasks.find_by(id: params[:id])
+    unless @taskst
+      redirect_to root_url
+    end
+  end
+  
+  def require_user_logged_in
+    unless logged_in?
+      redirect_to login_url
+    end
+  end
+
+  def counts(user)
+    @count_tasks = user.tasks.count
+  end
 end
