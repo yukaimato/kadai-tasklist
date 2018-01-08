@@ -11,11 +11,11 @@ class TasksController < ApplicationController
   # new ... 新規登録をするためのフォームを表示するだけ
   # create ... 実際に登録をするので、画面を持たない
   def new
-     @task = Task.new
+     @task = current_user.tasks.new
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.new(task_params)
 
     if @task.save
       flash[:success] = 'Task が正常に投稿されました'
@@ -58,22 +58,5 @@ class TasksController < ApplicationController
   # Strong Parameter
   def task_params
     params.require(:task).permit(:content, :status)
-  end
-  
-  def correct_user
-    @task = current_user.tasks.find_by(id: params[:id])
-    unless @taskst
-      redirect_to root_url
-    end
-  end
-  
-  def require_user_logged_in
-    unless logged_in?
-      redirect_to login_url
-    end
-  end
-
-  def counts(user)
-    @count_tasks = user.tasks.count
   end
 end
