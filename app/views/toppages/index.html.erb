@@ -1,5 +1,5 @@
 <% if logged_in? %>
- <div class="row">
+   <div class="row">
     <aside class="col-md-4">
       <%= form_for(@task) do |f| %>
         <div class="form-group">
@@ -14,10 +14,12 @@
     </div>
   </div>
 <% else %>
-  <div class="center jumbotron">
-    <div class="text-center">
-      <h1>Welcome to the Tasks</h1>
-      <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
-    </div>
+
+<div class="center jumbotron">
+  <div class="text-center">
+    <h1>Welcome to the Tasks</h1>
+    <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
   </div>
+  
+</div>
 <% end %>
