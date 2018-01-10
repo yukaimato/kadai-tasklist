@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :correct_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all
+    @tasks = current_user.tasks.all
   end
 
   def show
@@ -14,7 +14,7 @@ class TasksController < ApplicationController
   # new ... 新規登録をするためのフォームを表示するだけ
   # create ... 実際に登録をするので、画面を持たない
   def new
-     @task = Task.new
+     @task = current_user.tasks.build
   end
 
   def create
